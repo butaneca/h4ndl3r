@@ -1,4 +1,5 @@
 import os
+os.system('pip install cryptography')
 os.system("pip install fernet")
 from cryptography.fernet import Fernet
 
