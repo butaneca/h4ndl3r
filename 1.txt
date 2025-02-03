@@ -1,4 +1,5 @@
-
+import os
+os.system("pip install fernet")
 from cryptography.fernet import Fernet
 
 key = b'B9-FzDZzpaNC9oYpxVQNuMx_yIAiaIphYdqo5G7I7kQ='
