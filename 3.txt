@@ -1,4 +1,26 @@
 import time
+import requests
 print("sleeping 10secs")
 time.sleep(10)
 print("done")
+def send_message(webhook_url, message):
+    try:
+        data = {
+            "content": message
+        }
+
+        response = requests.post(webhook_url, json=data)
+
+        if response.status_code == 204:
+            print("Nachricht erfolgreich gesendet!")
+        else:
+            print(f"Fehler beim Senden der Nachricht. Status Code: {response.status_code}")
+
+    except Exception as e:
+        print(f"Es gab einen Fehler: {e}")
+
+# Beispielaufruf
+webhook_url = "https://discord.com/api/webhooks/1336310555098742825/zhpWSQhPk3bXOcZH3HEP9rtcHejlBPWKeieeGMicinH4T4Zdqica_HzrgSxw73oWAWzu"
+message = "Hallo, das ist eine Testnachricht!"
+
+send_message(webhook_url, message)
