@@ -1,3 +1,4 @@
 import time
-time.sleep(120)
-print("sleeping 120secs")
+print("sleeping 10secs")
+time.sleep(10)
+print("done")
